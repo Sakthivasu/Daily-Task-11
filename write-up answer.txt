@@ -1,0 +1,63 @@
+Sales Analytics Dashboard – Write-up
+
+1. Monthly Revenue SQL Query
+
+The monthly revenue is calculated using the following SQL query:
+
+I used "DATE_FORMAT()" to convert the sales date into a month and year format such as "Sep 2025". This makes the chart easier to read.
+
+I used "GROUP BY" to group all sales records that belong to the same month. Then "SUM(total_amount)" calculates the total revenue for each month.
+
+As a result, the query returns one row per month with the total revenue generated in that month.
+
+---
+
+2. How Charts Re-fetch When the Date Filter Changes
+
+In React, the selected filters are stored in state using "useState()".
+
+When the user changes the From Date, To Date, or Category filter, the filter state is updated using "setFilters()".
+
+The dependency array contains "params".
+
+Whenever the filter values change, "params" also changes. This automatically triggers the "useEffect()" hook again, which sends a new API request to the Flask backend and fetches updated data.
+
+The chart then re-renders with the new filtered results.
+
+---
+
+3. Difference Between Bar Chart and Line Chart
+
+Bar Chart
+
+A Bar Chart is used when comparing values between different categories.
+
+In my project, I used Bar Charts for:
+
+- Revenue by Category
+- Revenue by Region
+
+This makes it easy to compare which category or region has higher revenue.
+
+Line Chart
+
+A Line Chart is used to show trends over time.
+
+In my project, I used a Line Chart to display monthly revenue.
+
+This helps users understand whether revenue is increasing, decreasing, or staying stable over different months.
+
+---
+
+4. What Does ResponsiveContainer Do?
+
+"ResponsiveContainer" is a Recharts component that automatically adjusts the chart size based on the available screen space.
+
+Why It Is Important
+
+- Makes charts responsive on different screen sizes.
+- Ensures charts look good on desktop, tablet, and mobile devices.
+- Automatically resizes charts when the browser window size changes.
+- Improves the overall user experience.
+
+Without "ResponsiveContainer", charts may not fit properly on smaller screens.
